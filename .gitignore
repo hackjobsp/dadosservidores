@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+uploads/*
+!uploads/.gitkeep
+database.db-journal
+# database.db  # Descomente se não quiser subir o banco de dados local

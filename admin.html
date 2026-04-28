@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin — Ficha Funcional</title>
+  <meta name="description" content="Painel de controle do administrador para gestão das fichas funcionais." />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="page-loader" id="pageLoader"><div class="loader-ring"></div></div>
+
+  <!-- Auth Guard Overlay -->
+  <div class="login-modal" id="authGuard">
+    <div class="login-box">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🔐</div>
+      <h3>Painel Admin</h3>
+      <p>Digite a senha para acessar o dashboard.</p>
+      <input type="password" id="guardPassInput" placeholder="••••••••"
+             onkeydown="if(event.key==='Enter')checkGuard()" />
+      <div class="login-error" id="guardError" style="display:none;">Senha incorreta.</div>
+      <div style="display:flex;gap:.75rem;margin-top:1.25rem;">
+        <button class="btn btn-ghost" style="flex:1;" onclick="window.location.href='index.html'">← Voltar</button>
+        <button class="btn btn-primary" style="flex:1;" onclick="checkGuard()">Entrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-brand">
+      <img src="image.png" alt="Logo EMEF" class="logo-img" />
+      <div>
+        <h1>Dashboard Admin</h1>
+        <div class="header-subtitle">EMEF Dr. Octávio Manhães de Andrade</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost" onclick="exportReport()"><i data-lucide="download"></i> Exportar Relatório</button>
+      <button class="btn btn-ghost" onclick="window.location.href='index.html'"><i data-lucide="home"></i> Início</button>
+    </div>
+  </header>
+
+  <main class="container" id="adminContent" style="display:none; padding-top:2rem; padding-bottom:4rem;">
+
+    <!-- KPI Stats -->
+    <div class="stats-row" id="statsRow"></div>
+
+    <!-- Charts -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <h3>📊 Status das Fichas Funcionais</h3>
+        <canvas id="chartFichas"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>📂 Documentos por Servidor (Top 10)</h3>
+        <canvas id="chartDocs"></canvas>
+      </div>
+    </div>
+
+    <!-- Second charts row -->
+    <div class="charts-row" style="margin-bottom:2.5rem;">
+      <div class="chart-card">
+        <h3>⏱️ Entregas Recentes</h3>
+        <div class="timeline" id="timelineList"></div>
+      </div>
+      <div class="chart-card">
+        <h3>📈 Entregas por Status</h3>
+        <canvas id="chartStatus"></canvas>
+      </div>
+    </div>
+
+    <!-- Teachers folders -->
+    <div class="section-title">
+      <h2>📁 Pastas dos Servidores</h2>
+      <button class="btn btn-ghost btn-sm" onclick="refreshAll()">🔄 Atualizar</button>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" id="adminSearch" placeholder="🔍 Buscar servidor..." oninput="filterAdmin()" />
+      <button class="filter-chip active" id="chip_all"     onclick="setFilter('all')">Todos</button>
+      <button class="filter-chip"        id="chip_done"    onclick="setFilter('done')">✅ Completos</button>
+      <button class="filter-chip"        id="chip_partial" onclick="setFilter('partial')">🔄 Parciais</button>
+      <button class="filter-chip"        id="chip_pending" onclick="setFilter('pending')">⏳ Pendentes</button>
+    </div>
+
+    <div class="admin-grid" id="adminGrid"></div>
+    <div class="empty-state" id="adminEmpty" style="display:none;">
+      <div class="empty-icon">📂</div>
+      <p>Nenhum servidor encontrado com esse filtro.</p>
+    </div>
+  </main>
+
+  <!-- Teacher Detail Modal -->
+  <div class="modal-overlay" id="teacherModal" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span style="font-size:1.5rem;">📁</span>
+        <h3 id="modalTeacherName">Professor</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Tabs inside modal -->
+        <div class="tabs-bar" style="margin-bottom:1.25rem;">
+          <button class="tab-btn active" id="mTabFicha" onclick="switchModalTab('ficha')">📝 Ficha Funcional</button>
+          <button class="tab-btn" id="mTabDocs" onclick="switchModalTab('docs')">📂 Documentos</button>
+        </div>
+        <div id="mPanelFicha" class="tab-panel active">
+          <div id="fichaPreviewContent"></div>
+        </div>
+        <div id="mPanelDocs" class="tab-panel">
+          <div class="doc-list-admin" id="docsAdminList"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal()">Fechar</button>
+        <button class="btn btn-ghost" id="btnDownloadAllDocs" onclick="downloadAllDocs()">📦 Baixar Todos Docs</button>
+        <button class="btn btn-primary" id="btnDownloadFicha" onclick="downloadCurrentFicha()">
+          📄 Baixar Ficha PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast-container"></div>
+
+  <script src="js/teachers.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/pdf-generator-v2.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

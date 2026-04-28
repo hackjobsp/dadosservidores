@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Funcional - EMEF Dr. Octávio Manhães de Andrade</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .header p {
+            font-size: 11px;
+            margin: 1px 0;
+        }
+
+        .title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0;
+            font-size: 10px;
+        }
+
+        td, th {
+            border: 1px solid #000;
+            padding: 6px 5px;
+            vertical-align: top;
+        }
+
+        .header-cell {
+            background-color: #d3d3d3;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+            font-size: 9px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            border: none;
+            border-bottom: 1px solid #333;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            padding: 2px 0;
+            background: transparent;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            background: #fffacd;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 3px;
+            margin-top: 1px;
+        }
+
+        .checkbox-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 9px;
+        }
+
+        .checkbox-line input {
+            margin-right: 4px;
+        }
+
+        .checkbox-label {
+            flex: 1;
+        }
+
+        .inline-field {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .row-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .multi-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+        }
+
+        .footer-msg {
+            text-align: center;
+            padding: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid #000;
+            margin-top: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        button:hover {
+            background: #1a3a52;
+        }
+
+        button.reset {
+            background: #f39c12;
+        }
+
+        button.reset:hover {
+            background: #e67e22;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .page {
+                width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            button {
+                display: none;
+            }
+        }
+
+        .obs {
+            font-size: 9px;
+            font-style: italic;
+            color: #333;
+            margin: 5px 0 3px 0;
+        }
+
+        .space-top {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <h1>EMEF "Dr. Octávio Manhães de Andrade"</h1>
+            <p>Rua Benjamin Costa, nº 78 – Sagrado Coração de Jesus</p>
+            <p>Colatina – ES CEP: 29707-130 Tel.: (27) 3722-3708</p>
+            <div class="title">FICHA FUNCIONAL – 2026</div>
+        </div>
+
+        <form id="fichaForm">
+            <!-- Dados Pessoais -->
+            <table>
+                <tr>
+                    <td colspan="2" class="header-cell">NOME COMPLETO:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <span class="label">Data de Nascimento:</span>
+                        <input type="date" required>
+                    </td>
+                    <td style="width: 50%;">
+                        <span class="label">Naturalidade:</span>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <span class="label">Cor:</span>
+                        <select required>
+                            <option value="">Selecione</option>
+                            <option>Branca</option>
+                            <option>Preta</option>
+                            <option>Parda</option>
+                            <option>Amarela</option>
+                            <option>Indígena</option>
+                        </select>
+                    </td>
+                    <td style="width: 50%;">
+                        <span class="label">CPF:</span>
+                        <input type="text" placeholder="000.000.000-00" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px;">
+                            <div>
+                                <span class="label">Carteira de Identidade:</span>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <span class="label">Órg. Emissor:</span>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <span class="label">Data de Expedição:</span>
+                                <input type="date">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <span class="label">Carteira Profissional Nº:</span>
+                        <input type="text">
+                    </td>
+                    <td style="width: 50%;">
+                        <span class="label">Série:</span>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <span class="label">Título Eleitoral:</span>
+                        <input type="text">
+                    </td>
+                    <td style="width: 50%;">
+                        <span class="label">PIS/PASEP:</span>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <span class="label">Cargo (contra-cheque):</span>
+                        <input type="text" required>
+                    </td>
+                    <td style="width: 50%;">
+                        <span class="label">Matrícula/Nº Funcional:</span>
+                        <input type="text" required>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Filiação -->
+            <table class="space-top">
+                <tr>
+                    <td class="header-cell" style="width: 15%; font-size: 10px;">Filiação:</td>
+                    <td style="width: 85%;">
+                        <span class="label">Mãe:</span>
+                        <input type="text" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="label">Pai:</span>
+                        <input type="text">
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Endereço Residencial -->
+            <table class="space-top">
+                <tr>
+                    <td class="header-cell" style="width: 15%;">Endereço Residencial</td>
+                    <td colspan="2" style="width: 85%;">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px;">
+                            <div>
+                                <span class="label">Rua/Av:</span>
+                                <input type="text" required>
+                            </div>
+                            <div>
+                                <span class="label">Nº:</span>
+                                <input type="text" required>
+                            </div>
+                            <div>
+                                <span class="label">Aptº:</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px;">
+                            <div>
+                                <span class="label">Bairro:</span>
+                                <input type="text" required>
+                            </div>
+                            <div>
+                                <span class="label">CEP:</span>
+                                <input type="text" required>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px;">
+                            <div>
+                                <span class="label">Tel:</span>
+                                <input type="tel">
+                            </div>
+                            <div>
+                                <span class="label">Celular:</span>
+                                <input type="tel" required>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <span class="label">E-mail:</span>
+                        <input type="email" required>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Área de Atuação -->
+            <table class="space-top">
+                <tr>
+                    <td class="header-cell" style="width: 15%;">Área de Atuação</td>
+                    <td style="width: 85%;">
+                        <div style="margin-bottom: 5px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="ai1">
+                                <span class="checkbox-label">Anos Iniciais do Ensino Fundamental:</span>
+                                <input type="text" style="width: 40%; margin-left: 10px;">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 5px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="af1">
+                                <span class="checkbox-label">Anos Finais do Ensino Fundamental:</span>
+                                <input type="text" style="width: 40%; margin-left: 10px;">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="adm1">
+                                <span class="checkbox-label">Administrativo:</span>
+                                <input type="text" style="width: 40%; margin-left: 10px;">
+                            </div>
+                        </div>
+                        <div style="margin-top: 5px;">
+                            <span class="label">Turno de trabalho:</span>
+                            <span class="inline-field">
+                                <input type="radio" id="mat" name="turno" value="Matutino" required>
+                                <label for="mat" style="font-size: 9px; margin: 0;">Matutino</label>
+                            </span>
+                            <span class="inline-field">
+                                <input type="radio" id="vesp" name="turno" value="Vespertino" required>
+                                <label for="vesp" style="font-size: 9px; margin: 0;">Vespertino</label>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Situação Funcional -->
+            <table class="space-top">
+                <tr>
+                    <td class="header-cell" style="width: 15%;">Situação Funcional (nesta U.E.)</td>
+                    <td style="width: 85%;">
+                        <div style="margin-bottom: 8px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="est">
+                                <span class="checkbox-label">Estagiário</span>
+                                <span class="inline-field">Carga Horária:
+                                    <input type="text" style="width: 60px; display: inline;">
+                                </span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="dt1">
+                                <span class="checkbox-label">DT PMC:</span>
+                                <span class="inline-field">Disciplina(s)
+                                    <input type="text" style="width: 120px; display: inline;">
+                                </span>
+                                <span class="inline-field">Carga Horária:
+                                    <input type="text" style="width: 60px; display: inline;">
+                                </span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="loc">
+                                <span class="checkbox-label">Localizado Provisoriamente:</span>
+                                <span class="inline-field">Disciplina(s):
+                                    <input type="text" style="width: 120px; display: inline;">
+                                </span>
+                                <span class="inline-field">Carga Horária:
+                                    <input type="text" style="width: 60px; display: inline;">
+                                </span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <span class="label">Escola(s) de origem:</span>
+                            <input type="text" style="width: 100%;">
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="efpm">
+                                <span class="checkbox-label">Efetivo PMC</span>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="estat">
+                                <span class="checkbox-label">Estatutário</span>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="celet">
+                                <span class="checkbox-label">Celetista - Disciplina(s)</span>
+                                <input type="text" style="width: 150px; margin-left: 10px; display: inline;">
+                                Carga Horária:
+                                <input type="text" style="width: 70px; display: inline;">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="efsedu">
+                                <span class="checkbox-label">Efetivo SEDU:</span>
+                                <span class="inline-field">Disciplina(s)
+                                    <input type="text" style="width: 150px; display: inline;">
+                                </span>
+                                <span class="inline-field">Carga Horária:
+                                    <input type="text" style="width: 60px; display: inline;">
+                                </span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="dt2">
+                                <span class="checkbox-label">DT PMC:</span>
+                                <span class="inline-field">Disciplina(s)
+                                    <input type="text" style="width: 150px; display: inline;">
+                                </span>
+                                <span class="inline-field">Carga Horária:
+                                    <input type="text" style="width: 60px; display: inline;">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="obs">OBS.: Especifique a sua Carga Horária caso complete em outra(s) escola(s):</div>
+                        <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 10px; margin-bottom: 8px;">
+                            <div>
+                                <span class="label">Escola:</span>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <span class="label">Carga Horária:</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 10px;">
+                            <div>
+                                <span class="label">Escola:</span>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <span class="label">Carga Horária:</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Escolarização e Formação Acadêmica -->
+            <table class="space-top">
+                <tr>
+                    <td class="header-cell" style="width: 15%;">Escolarização Formação Acadêmica<br><span style="font-size: 8px;">(Especificar cada nível de Ensino)</span></td>
+                    <td style="width: 85%;">
+                        <span class="label">Ensino Médio:</span>
+                        <input type="text" style="width: 100%; margin-bottom: 8px;">
+                        <span class="label">Estudos Adicionais:</span>
+                        <input type="text" style="width: 100%; margin-bottom: 8px;">
+                        <span class="label">Curso Superior Concluído:</span>
+                        <input type="text" style="width: 100%; margin-bottom: 5px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1.5fr; gap: 8px; margin-bottom: 8px;">
+                            <div>
+                                <span class="label">Ano de Início:</span>
+                                <input type="number" placeholder="YYYY">
+                            </div>
+                            <div>
+                                <span class="label">Ano de Conclusão:</span>
+                                <input type="number" placeholder="YYYY">
+                            </div>
+                            <div>
+                                <span class="label">Tipo de Instituição:</span>
+                                <div style="margin-top: 2px; font-size: 9px;">
+                                    <span><input type="radio" name="tipo1" value="Pública"> Pública</span>
+                                    <span style="margin-left: 10px;"><input type="radio" name="tipo1" value="Privada"> Privada</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="label">Nome da Instituição:</span>
+                        <input type="text" style="width: 100%; margin-bottom: 8px;">
+                        <span class="label">Curso Superior em andamento:</span>
+                        <input type="text" style="width: 100%; margin-bottom: 5px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 8px; margin-bottom: 8px;">
+                            <div>
+                                <span class="label">Ano de Início:</span>
+                                <input type="number" placeholder="YYYY">
+                            </div>
+                            <div>
+                                <span class="label">Tipo de Instituição:</span>
+                                <div style="margin-top: 2px; font-size: 9px;">
+                                    <span><input type="radio" name="tipo2" value="Pública"> Pública</span>
+                                    <span style="margin-left: 10px;"><input type="radio" name="tipo2" value="Privada"> Privada</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="label">Nome da Instituição:</span>
+                        <input type="text" style="width: 100%; margin-bottom: 8px;">
+                        <span class="label">Pós Graduação:</span>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                            <div>
+                                <div style="font-size: 9px; margin-bottom: 3px;">
+                                    <span><input type="radio" name="posg" value="Concluído"> Concluído</span>
+                                </div>
+                                <div style="font-size: 9px;">
+                                    <span><input type="radio" name="posg" value="Cursando"> Cursando</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                            <div>
+                                <span class="label">Especialização:</span>
+                                <input type="text">
+                                <span class="label" style="margin-top: 3px;">Conclusão:</span>
+                                <input type="number" placeholder="YYYY">
+                            </div>
+                            <div>
+                                <span class="label">Mestrado:</span>
+                                <input type="text">
+                                <span class="label" style="margin-top: 3px;">Conclusão:</span>
+                                <input type="number" placeholder="YYYY">
+                            </div>
+                        </div>
+                        <span class="label">Doutorado:</span>
+                        <input type="text" style="width: 100%; margin-bottom: 3px;">
+                        <span class="label">Conclusão:</span>
+                        <input type="number" placeholder="YYYY">
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Outros Cursos Específicos -->
+            <table class="space-top">
+                <tr>
+                    <td colspan="2" class="header-cell">Outros Cursos Específicos (Formação Continuada no mínimo 80 horas -2019)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 9px;">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c1">
+                                <label for="c1" style="margin: 0;">Creche (0 a 3 anos)</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c2">
+                                <label for="c2" style="margin: 0;">Pré-Escola (4 e 5 anos)</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c3">
+                                <label for="c3" style="margin: 0;">Educação de Jovens e Adultos</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c4">
+                                <label for="c4" style="margin: 0;">Anos Finais Ensino Fundamental</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c5">
+                                <label for="c5" style="margin: 0;">Ensino Médio</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c6">
+                                <label for="c6" style="margin: 0;">Educação do Campo</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c7">
+                                <label for="c7" style="margin: 0;">Anos Iniciais Ensino Fundamental</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c8">
+                                <label for="c8" style="margin: 0;">Educação Indígena</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c9">
+                                <label for="c9" style="margin: 0;">Gênero e diversidade sexual</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c10">
+                                <label for="c10" style="margin: 0;">Educação Especial</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c11">
+                                <label for="c11" style="margin: 0;">Educação em Direitos Humanos</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c12">
+                                <label for="c12" style="margin: 0;">Outros</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c13">
+                                <label for="c13" style="margin: 0;">Educação Ambiental</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c14">
+                                <label for="c14" style="margin: 0;">Relações etnorraciais e história afro-brasileira</label>
+                            </div>
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="c15">
+                                <label for="c15" style="margin: 0;">Nenhum</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Footer Message -->
+            <div class="footer-msg">
+                Seja bem-vindo(a)! Você é um(a) integrante do grupo de profissionais desta escola.
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit">💾 Salvar Formulário</button>
+                <button type="reset" class="reset">🔄 Limpar Campos</button>
+                <button type="button" onclick="window.print()">🖨️ Imprimir</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('fichaForm');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('✅ Ficha Funcional preenchida com sucesso!');
+        });
+    </script>
+</body>
+</html>

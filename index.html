@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ficha Funcional — Professores</title>
+  <meta name="description" content="Plataforma de envio de ficha funcional e documentos dos professores." />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-ring"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-brand">
+      <img src="image.png" alt="Logo EMEF" class="logo-img" />
+      <div>
+        <h1>Ficha Funcional</h1>
+        <div class="header-subtitle">EMEF Dr. Octávio Manhães de Andrade</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost" id="btnAdmin" onclick="openAdminLogin()">
+        <i data-lucide="lock"></i> Acesso Admin
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="container">
+    <div class="hero">
+      <h2>Selecione sua Pasta</h2>
+      <p>Clique no seu nome para acessar sua área, preencher a ficha funcional e enviar seus documentos.</p>
+
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Buscar servidor..." oninput="filterTeachers()" autocomplete="off" />
+      </div>
+      
+      <button class="btn btn-primary" onclick="handleCreateFolder()" style="margin-top: 1.5rem; background: var(--accent); border-color: var(--accent); color: #000;">
+        <i data-lucide="plus-circle"></i> Criar Nova Pasta (Servidor)
+      </button>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stats-row" id="statsRow" style="max-width:800px;margin:0 auto 2.5rem;">
+      <div class="stat-card">
+        <div class="stat-icon"><i data-lucide="users"></i></div>
+        <div class="stat-value" id="statTotal">44</div>
+        <div class="stat-label">Servidores</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i data-lucide="check-circle"></i></div>
+        <div class="stat-value" id="statDone">0</div>
+        <div class="stat-label">Fichas Enviadas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i data-lucide="folder"></i></div>
+        <div class="stat-value" id="statDocs">0</div>
+        <div class="stat-label">Docs. Enviados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i data-lucide="clock"></i></div>
+        <div class="stat-value" id="statPending">44</div>
+        <div class="stat-label">Pendentes</div>
+      </div>
+    </div>
+
+    <!-- Teacher Grid -->
+    <div class="teachers-grid" id="teachersGrid"></div>
+
+    <!-- Empty state & Create Folder suggestion -->
+    <div class="empty-state" id="emptyState" style="display:none; margin-top: 2rem;">
+      <div class="empty-icon">🔍</div>
+      <p>Nenhum servidor encontrado com esse nome.</p>
+    </div>
+
+    <div id="createSuggestion" style="display:none; text-align:center; margin-top:2rem; padding: 2rem; background: var(--bg-card); border: 1px dashed var(--accent); border-radius: var(--radius);">
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">📂</div>
+      <h3 style="color: #fff; margin-bottom: 0.5rem;">Sua pasta não foi encontrada?</h3>
+      <p style="margin-bottom: 1.5rem;">Você pode criar uma pasta de servidor agora mesmo com o nome:<br>
+      <strong id="newTeacherName" style="color: var(--accent); font-size: 1.1rem;"></strong></p>
+      <button class="btn btn-primary btn-lg" onclick="handleCreateFolder()">
+        <i data-lucide="plus-circle"></i> Criar Minha Pasta
+      </button>
+    </div>
+  </main>
+
+  <!-- Admin Login Modal -->
+  <div class="login-modal" id="adminLoginModal" style="display:none;">
+    <div class="login-box">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🔐</div>
+      <h3>Acesso Restrito</h3>
+      <p>Digite a senha do administrador para continuar.</p>
+      <input type="password" id="adminPassInput" placeholder="••••••••"
+             onkeydown="if(event.key==='Enter')checkAdminPass()" />
+      <div class="login-error" id="loginError" style="display:none;">Senha incorreta. Tente novamente.</div>
+      <div style="display:flex;gap:.75rem;margin-top:1.25rem;">
+        <button class="btn btn-ghost" style="flex:1;" onclick="closeAdminLogin()">Cancelar</button>
+        <button class="btn btn-primary" style="flex:1;" onclick="checkAdminPass()">Entrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast-container"></div>
+
+  <script src="js/teachers.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

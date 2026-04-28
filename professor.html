@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área do Servidor — Ficha Funcional</title>
+  <meta name="description" content="Preencha sua ficha funcional e envie seus documentos." />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-ring"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-brand">
+      <button class="back-btn" onclick="window.location.href='index.html'">
+        <i data-lucide="chevron-left"></i> Voltar
+      </button>
+    </div>
+    <div class="header-brand" style="gap:.6rem;">
+      <img src="image.png" alt="Logo EMEF" class="logo-img-sm" />
+      <div>
+        <h1 id="headerTeacherName" style="font-size:1.1rem;">Carregando...</h1>
+        <div class="header-subtitle">EMEF Dr. Octávio Manhães de Andrade</div>
+      </div>
+    </div>
+    <div class="header-actions" style="min-width:100px;justify-content:flex-end;">
+      <span class="status-badge status-pending" id="headerStatus">⏳ Pendente</span>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top:2rem;padding-bottom:4rem;">
+
+    <!-- Progress Bar -->
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <div class="progress-label" id="progressLabel">Preenchimento da ficha funcional</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="progress-pct" id="progressPct">0%</div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-bar" role="tablist">
+      <button class="tab-btn active" id="tabFicha" role="tab" onclick="switchTab('ficha')">
+        📝 Ficha Funcional
+      </button>
+      <button class="tab-btn" id="tabDocs" role="tab" onclick="switchTab('docs')">
+        📂 Documentos
+      </button>
+    </div>
+
+    <!-- Tab: Ficha Funcional -->
+    <div class="tab-panel active" id="panelFicha" role="tabpanel">
+      <form id="fichaForm" novalidate>
+        <!-- Sections rendered by JS -->
+        <div id="fichaFormBody"></div>
+      </form>
+    </div>
+
+    <!-- Tab: Documentos -->
+    <div class="tab-panel" id="panelDocs" role="tabpanel">
+      <div style="margin-bottom:1.5rem;">
+        <p style="font-size:.9rem;">Envie os documentos listados abaixo. Clique em cada categoria para expandir e fazer o upload.</p>
+      </div>
+      <div class="doc-categories" id="docCategories"></div>
+    </div>
+
+    <!-- Confirm Bar -->
+    <div class="confirm-bar" id="confirmBar">
+      <div class="confirm-bar-text">
+        <strong id="confirmBarTitle">Pronto para enviar?</strong><br>
+        <span id="confirmBarSubtitle">Revise as informações antes de confirmar.</span>
+      </div>
+      <div style="display:flex;gap:.75rem;align-items:center;">
+        <button class="btn" id="btnPDF" onclick="baixarPDF()"
+          style="background:#1a6fb5;color:#fff;border-color:#1256a0;padding:.6rem 1.4rem;font-size:.95rem;font-weight:700;border-radius:8px;cursor:pointer;">
+          ⬇️ Baixar PDF
+        </button>
+        <button class="btn btn-success btn-lg" id="btnConfirm" onclick="confirmSubmit()">
+          ✅ Confirmar Envio
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div id="toast-container"></div>
+
+  <script src="js/teachers.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/pdf-generator-v2.js"></script>
+  <script src="js/professor.js"></script>
+</body>
+</html>

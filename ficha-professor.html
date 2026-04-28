@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha Funcional 2026 — EMEF Dr. Octávio Manhães de Andrade</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    background: #d0d0d0;
+    color: #000;
+  }
+
+  /* ── página A4 ── */
+  .pagina {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 12mm auto;
+    background: #fff;
+    padding: 10mm 12mm;
+    box-shadow: 0 0 14px rgba(0,0,0,.35);
+  }
+
+  /* ── cabeçalho ── */
+  .cabecalho {
+    display: flex;
+    border: 1.5pt solid #000;
+    margin-bottom: 4pt;
+  }
+  .cab-esq {
+    flex: 0 0 110pt;
+    border-right: 1pt solid #000;
+    padding: 4pt 6pt;
+    font-size: 7.5pt;
+    font-weight: 700;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+  }
+  .cab-centro {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4pt 6pt;
+    border-right: 1pt solid #000;
+    text-align: center;
+  }
+  .titulo-ficha {
+    font-size: 13pt;
+    font-weight: 900;
+    border: 1.5pt solid #000;
+    padding: 2pt 10pt;
+    display: inline-block;
+    margin-bottom: 4pt;
+  }
+  .unidade-linha {
+    font-size: 8pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4pt;
+    white-space: nowrap;
+  }
+  .cab-foto {
+    flex: 0 0 70pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7pt;
+    font-weight: 700;
+    text-align: center;
+    padding: 4pt;
+  }
+
+  /* ── tabela principal ── */
+  table.ficha {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1.5pt solid #000;
+    margin-bottom: 4pt;
+    table-layout: fixed;
+  }
+  table.ficha td {
+    border: 0.75pt solid #000;
+    padding: 2pt 4pt;
+    vertical-align: middle;
+    height: 20pt;
+    font-size: 8pt;
+  }
+  td.secao {
+    width: 62pt;
+    background: #f0f0f0;
+    font-weight: 900;
+    font-size: 7.5pt;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.3;
+    vertical-align: middle;
+  }
+  td.secao.tall { height: auto; }
+
+  /* inputs */
+  .lbl { font-size: 7pt; font-weight: 700; }
+  input[type=text], input[type=email] {
+    border: none;
+    border-bottom: 0.5pt solid #000;
+    font-size: 8.5pt;
+    font-family: Arial, sans-serif;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    padding: 0 2pt;
+  }
+  input[type=text].w40  { width: 40pt; }
+  input[type=text].w60  { width: 60pt; }
+  input[type=text].w80  { width: 80pt; }
+  input[type=text].w120 { width: 120pt; }
+  input[type=text].w150 { width: 150pt; }
+  input[type=text].w200 { width: 200pt; }
+  input[type=text].w240 { width: 240pt; }
+  input[type=text].w280 { width: 280pt; }
+  input[type=text].full { width: 100%; }
+
+  .campo { display: inline-flex; align-items: baseline; gap: 2pt; }
+  .campo + .campo { margin-left: 8pt; }
+
+  input[type=radio], input[type=checkbox] {
+    margin: 0 2pt 0 0;
+    cursor: pointer;
+  }
+  label { cursor: pointer; font-size: 7.5pt; }
+
+  .checks { display: flex; flex-wrap: wrap; gap: 2pt 12pt; font-size: 7.5pt; }
+  .checks label { white-space: nowrap; }
+
+  /* ── rodapé ── */
+  .bemvindo {
+    text-align: center;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 8.5pt;
+    margin: 6pt 0 4pt;
+  }
+  .rodape-escola {
+    border: 1pt solid #000;
+    text-align: center;
+    padding: 5pt;
+    font-size: 8pt;
+    margin-bottom: 4pt;
+  }
+  .rodape-escola strong { font-size: 9.5pt; }
+  .data-linha {
+    text-align: right;
+    font-size: 8pt;
+    margin-bottom: 16pt;
+  }
+  .assinaturas {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24pt;
+  }
+  .assin-bloco {
+    width: 185pt;
+    border-top: 1pt solid #000;
+    text-align: center;
+    padding-top: 3pt;
+    font-size: 8pt;
+    font-weight: 700;
+  }
+
+  /* ── impressão ── */
+  @media print {
+    body { background: none; }
+    .pagina { box-shadow: none; margin: 0; padding: 8mm 10mm; width: 100%; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+
+  /* botões */
+  .toolbar {
+    width: 210mm;
+    margin: 0 auto 6pt;
+    display: flex;
+    gap: 8pt;
+    justify-content: flex-end;
+  }
+  .btn {
+    padding: 5pt 14pt;
+    font-size: 9pt;
+    font-weight: 700;
+    border: 1.5pt solid #555;
+    background: #f5f5f5;
+    cursor: pointer;
+    border-radius: 3pt;
+  }
+  .btn:hover { background: #e0e0e0; }
+  .btn-print { background: #1a6fb5; color: #fff; border-color: #1256a0; }
+  .btn-print:hover { background: #1256a0; }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <button class="btn" onclick="limpar()">🗑 Limpar</button>
+  <button class="btn btn-print" onclick="window.print()">🖨 Imprimir / Salvar PDF</button>
+</div>
+
+<div class="pagina">
+
+  <!-- CABEÇALHO -->
+  <div class="cabecalho">
+    <div class="cab-esq">
+      ESTADO DO ESPÍRITO SANTO<br>
+      PREFEITURA MUNICIPAL DE COLATINA<br>
+      SECRETARIA MUNICIPAL DE EDUCAÇÃO
+    </div>
+    <div class="cab-centro">
+      <div class="titulo-ficha">FICHA FUNCIONAL – 2026</div>
+      <div class="unidade-linha">
+        <span class="lbl">UNIDADE DE ENSINO:</span>
+        <input type="text" id="unidadeEnsino" name="unidadeEnsino" style="width:200pt;">
+      </div>
+    </div>
+    <div class="cab-foto">
+      Espaço para<br>FOTO<br>3×4
+    </div>
+  </div>
+
+  <!-- TABELA PRINCIPAL -->
+  <table class="ficha">
+
+    <!-- 1 — DADOS PESSOAIS -->
+    <tr>
+      <td class="secao" rowspan="7">1 – DADOS<br>PESSOAIS</td>
+      <td colspan="4">
+        <span class="lbl">NOME COMPLETO:</span>
+        <input type="text" id="nomeCompleto" name="nomeCompleto" style="width:82%;font-weight:700;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Data de Nascimento:</span>
+        <input type="text" id="dataNascimento" name="dataNascimento" class="w80" placeholder="00/00/0000">
+      </td>
+      <td colspan="2">
+        <span class="lbl">Naturalidade:</span>
+        <input type="text" id="naturalidade" name="naturalidade" class="w120">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Cor / Raça:</span>
+        <input type="text" id="cor" name="cor" class="w100">
+      </td>
+      <td colspan="2">
+        <span class="lbl">CPF:</span>
+        <input type="text" id="cpf" name="cpf" class="w120" placeholder="000.000.000-00">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Carteira de Identidade Nº:</span>
+        <input type="text" id="rg" name="rg" class="w80">
+      </td>
+      <td>
+        <span class="lbl">Órgão Emissor:</span>
+        <input type="text" id="rgEmissor" name="rgEmissor" class="w60">
+      </td>
+      <td>
+        <span class="lbl">Data Expedição:</span>
+        <input type="text" id="rgExpedicao" name="rgExpedicao" class="w80" placeholder="00/00/0000">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Carteira Profissional Nº:</span>
+        <input type="text" id="ctpsNum" name="ctpsNum" class="w80">
+      </td>
+      <td colspan="2">
+        <span class="lbl">Série:</span>
+        <input type="text" id="ctpsSerie" name="ctpsSerie" class="w80">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Título Eleitoral:</span>
+        <input type="text" id="titulo" name="titulo" class="w120">
+      </td>
+      <td colspan="2">
+        <span class="lbl">PIS / PASEP:</span>
+        <input type="text" id="pisPasep" name="pisPasep" class="w120">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Cargo (contra-cheque):</span>
+        <input type="text" id="cargo" name="cargo" class="w120">
+      </td>
+      <td colspan="2">
+        <span class="lbl">Matrícula / Nº Funcional:</span>
+        <input type="text" id="matricula" name="matricula" class="w120">
+      </td>
+    </tr>
+
+    <!-- FILIAÇÃO -->
+    <tr>
+      <td class="secao">FILIAÇÃO</td>
+      <td colspan="4" style="padding:0;">
+        <table style="width:100%;border-collapse:collapse;">
+          <tr>
+            <td style="border:none;border-bottom:0.5pt solid #000;padding:2pt 4pt;">
+              <span class="lbl">Mãe:</span>
+              <input type="text" id="nomeMae" name="nomeMae" style="width:88%;">
+            </td>
+          </tr>
+          <tr>
+            <td style="border:none;padding:2pt 4pt;">
+              <span class="lbl">Pai:</span>
+              <input type="text" id="nomePai" name="nomePai" style="width:88%;">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ENDEREÇO RESIDENCIAL -->
+    <tr>
+      <td class="secao" rowspan="3">ENDEREÇO<br>RESIDENCIAL</td>
+      <td colspan="2">
+        <span class="lbl">Rua / Av.:</span>
+        <input type="text" id="rua" name="rua" style="width:70%;">
+      </td>
+      <td>
+        <span class="lbl">Nº:</span>
+        <input type="text" id="numero" name="numero" class="w40">
+      </td>
+      <td>
+        <span class="lbl">Aptº:</span>
+        <input type="text" id="apto" name="apto" class="w40">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Bairro:</span>
+        <input type="text" id="bairro" name="bairro" style="width:78%;">
+      </td>
+      <td colspan="2">
+        <span class="lbl">CEP:</span>
+        <input type="text" id="cep" name="cep" class="w100" placeholder="00000-000">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="lbl">Tel / Cel:</span>
+        <input type="text" id="telefone" name="telefone" class="w120" placeholder="(00) 00000-0000">
+      </td>
+      <td colspan="2">
+        <span class="lbl">E-mail:</span>
+        <input type="text" id="email" name="email" class="w150">
+      </td>
+    </tr>
+
+    <!-- 2 — ÁREA DE ATUAÇÃO -->
+    <tr>
+      <td class="secao">2 – ÁREA DE<br>ATUAÇÃO</td>
+      <td colspan="4" style="padding:4pt 6pt;line-height:1.6;">
+        <label><input type="checkbox" name="anosIniciais"> ( ) Anos Iniciais do Ensino Fundamental</label>&nbsp;&nbsp;
+        <label><input type="checkbox" name="anosFinais"> ( ) Anos Finais do Ensino Fundamental</label>&nbsp;&nbsp;
+        <label><input type="checkbox" name="administrativo"> ( ) Administrativo</label><br>
+        <span class="lbl">Turno:</span>&nbsp;
+        <label><input type="radio" name="turno" value="Matutino"> Matutino</label>&nbsp;&nbsp;
+        <label><input type="radio" name="turno" value="Vespertino"> Vespertino</label>
+      </td>
+    </tr>
+
+    <!-- 3 — SITUAÇÃO FUNCIONAL -->
+    <tr>
+      <td class="secao tall" style="vertical-align:top;padding-top:4pt;">3 – SITUAÇÃO<br>FUNCIONAL</td>
+      <td colspan="4" style="font-size:7.5pt;line-height:1.8;padding:4pt 6pt;">
+        <label><input type="checkbox" name="sfEstagiario"> ( ) Estagiário</label> — Carga Horária: <input type="text" name="sfEstagCH" class="w40"> h<br>
+
+        <label><input type="checkbox" name="sfDTPMC"> ( ) DT PMC</label> — Disciplina(s):
+        <input type="text" name="sfDTPMCDisc" class="w150"> CH: <input type="text" name="sfDTPMCCH" class="w40"> h<br>
+
+        <label><input type="checkbox" name="sfLocalizado"> ( ) Localizado Provisoriamente</label> — Disc:
+        <input type="text" name="sfLocDisc" class="w120"> CH: <input type="text" name="sfLocCH" class="w40"> h<br>
+        &nbsp;&nbsp;&nbsp;Escola de origem: <input type="text" name="sfEscolaOrigem" style="width:240pt;"><br>
+
+        <label><input type="checkbox" name="sfEfetivoPMC"> ( ) Efetivo PMC</label>
+        &nbsp;<label><input type="checkbox" name="sfEstatutario"> ( ) Estatutário</label>
+        &nbsp;<label><input type="checkbox" name="sfCeletista"> ( ) Celetista</label>
+        &nbsp;— Disc: <input type="text" name="sfEfetDisc" class="w120"> CH: <input type="text" name="sfEfetCH" class="w40"> h<br>
+
+        <label><input type="checkbox" name="sfEfSEDU"> ( ) Efetivo SEDU</label> — Disciplina(s):
+        <input type="text" name="sfSEDUDisc" class="w150"> CH: <input type="text" name="sfSEDUCH" class="w40"> h<br>
+
+        <div style="border-top:0.5pt solid #000;margin-top:3pt;padding-top:3pt;">
+          <strong style="font-size:7pt;">OBS.: Carga Horária em outra(s) escola(s):</strong><br>
+          Escola: <input type="text" name="escoComp1" style="width:200pt;"> CH: <input type="text" name="escoComp1CH" class="w40"> h<br>
+          Escola: <input type="text" name="escoComp2" style="width:200pt;"> CH: <input type="text" name="escoComp2CH" class="w40"> h
+        </div>
+      </td>
+    </tr>
+
+    <!-- 4 — ESCOLARIZAÇÃO / FORMAÇÃO ACADÊMICA -->
+    <tr>
+      <td class="secao tall" style="vertical-align:top;padding-top:4pt;">4 – ESCOLARIZAÇÃO /<br>FORMAÇÃO<br>ACADÊMICA</td>
+      <td colspan="4" style="font-size:7.5pt;line-height:1.7;padding:4pt 6pt;">
+        <span class="lbl">Ensino Médio:</span>
+        <input type="text" name="ensinoMedio" style="width:78%;"><br>
+
+        <span class="lbl">Superior Concluído:</span>
+        <input type="text" name="superiorConcluido" style="width:72%;"><br>
+        Ano Início: <input type="text" name="supConclInicio" class="w40">
+        &nbsp;Conclusão: <input type="text" name="supConclFim" class="w40">
+        &nbsp;Instituição:
+        <label><input type="radio" name="supConclInst" value="Pública"> Pública</label>
+        <label><input type="radio" name="supConclInst" value="Privada"> Privada</label><br>
+        <span class="lbl">Nome da Instituição:</span>
+        <input type="text" name="supConclInstNome" style="width:72%;"><br>
+
+        <span class="lbl">Superior em Andamento:</span>
+        <input type="text" name="superiorAndamento" style="width:67%;"><br>
+        Ano Início: <input type="text" name="supAndInicio" class="w40">
+        &nbsp;Instituição:
+        <label><input type="radio" name="supAndInst" value="Pública"> Pública</label>
+        <label><input type="radio" name="supAndInst" value="Privada"> Privada</label><br>
+        <span class="lbl">Nome da Instituição:</span>
+        <input type="text" name="supAndInstNome" style="width:72%;"><br>
+
+        <div style="border-top:0.5pt solid #000;margin-top:3pt;padding-top:3pt;display:flex;gap:12pt;align-items:flex-start;">
+          <div style="min-width:120pt;">
+            <span class="lbl">Pós-Graduação:</span><br>
+            <label><input type="radio" name="posGrad" value="Concluído"> Concluído</label>
+            &nbsp;<label><input type="radio" name="posGrad" value="Cursando"> Cursando</label>
+          </div>
+          <div style="flex:1;">
+            Especialização: <input type="text" name="especializacao" class="w150"><br>
+            Mestrado: <input type="text" name="mestrado" class="w150"><br>
+            Doutorado: <input type="text" name="doutorado" class="w150">
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <!-- 5 — OUTROS CURSOS ESPECÍFICOS -->
+    <tr>
+      <td class="secao tall" style="vertical-align:top;padding-top:4pt;">5 – OUTROS CURSOS<br>ESPECÍFICOS<br><span style="font-size:6pt;font-weight:400;">(Form. Continuada<br>mín. 80h – 2019)</span></td>
+      <td colspan="4" style="padding:4pt 6pt;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2pt 6pt;font-size:7.5pt;">
+          <label><input type="checkbox" name="fcCreche"> ( ) Creche (0 a 3 anos)</label>
+          <label><input type="checkbox" name="fcPreEscola"> ( ) Pré-Escola (4 e 5 anos)</label>
+          <label><input type="checkbox" name="fcEJA"> ( ) EJA</label>
+
+          <label><input type="checkbox" name="fcAnosIniciais"> ( ) Anos Iniciais do EF</label>
+          <label><input type="checkbox" name="fcEnsinoMedio"> ( ) Ensino Médio</label>
+          <label><input type="checkbox" name="fcEdCampo"> ( ) Educação do Campo</label>
+
+          <label><input type="checkbox" name="fcAnosFinais"> ( ) Anos Finais do EF</label>
+          <label><input type="checkbox" name="fcEdIndigena"> ( ) Educação Indígena</label>
+          <label><input type="checkbox" name="fcGenero"> ( ) Gênero e div. sexual</label>
+
+          <label><input type="checkbox" name="fcEdEspecial"> ( ) Educação Especial</label>
+          <label><input type="checkbox" name="fcDirHumanos"> ( ) Ed. em Dir. Humanos</label>
+          <label><input type="checkbox" name="fcOutros"> ( ) Outros</label>
+
+          <label><input type="checkbox" name="fcEdAmbiental"> ( ) Educação Ambiental</label>
+          <label><input type="checkbox" name="fcRelacoes"> ( ) Ed. relações étnico-raciais</label>
+          <label><input type="checkbox" name="fcNenhum"> ( ) Nenhum</label>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- RODAPÉ -->
+  <div class="bemvindo">
+    Seja bem-vindo(a)! Você é um(a) integrante do grupo de profissionais desta escola.
+  </div>
+
+  <div class="rodape-escola">
+    <strong>EMEF "Dr. Octávio Manhães de Andrade"</strong><br>
+    Rua Benjamin Costa, nº 78 – Sagrado Coração de Jesus<br>
+    Colatina – ES &nbsp;|&nbsp; CEP: 29707-130 &nbsp;|&nbsp; Tel.: (27) 3722-3708
+  </div>
+
+  <div class="data-linha">
+    Colatina - ES, _______ de _______________________ de 2026.
+  </div>
+
+  <div class="assinaturas">
+    <div class="assin-bloco">Assinatura do Profissional</div>
+    <div class="assin-bloco">Assinatura da Direção</div>
+  </div>
+
+</div><!-- /pagina -->
+
+<script>
+  // Máscaras básicas
+  document.getElementById('cpf').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,11);
+    v = v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+    this.value = v;
+  });
+  document.getElementById('cep').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,8);
+    v = v.replace(/(\d{5})(\d)/,'$1-$2');
+    this.value = v;
+  });
+  document.getElementById('telefone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,11);
+    if(v.length<=10) v=v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
+    else v=v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3');
+    this.value = v;
+  });
+
+  function limpar() {
+    if(confirm('Limpar todos os campos?')) {
+      document.querySelectorAll('input[type=text], input[type=email]').forEach(i => i.value = '');
+      document.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(i => i.checked = false);
+    }
+  }
+
+  // Auto-save no localStorage
+  const CAMPOS_TXT = document.querySelectorAll('input[type=text],input[type=email]');
+  const CAMPOS_CHK = document.querySelectorAll('input[type=radio],input[type=checkbox]');
+  function salvar() {
+    CAMPOS_TXT.forEach(i=>{ if(i.name) localStorage.setItem('ff_'+i.name, i.value); });
+    CAMPOS_CHK.forEach(i=>{ if(i.name) localStorage.setItem('ff_'+i.name+'_'+i.value, i.checked); });
+  }
+  function restaurar() {
+    CAMPOS_TXT.forEach(i=>{ const v=localStorage.getItem('ff_'+i.name); if(v!=null) i.value=v; });
+    CAMPOS_CHK.forEach(i=>{ const v=localStorage.getItem('ff_'+i.name+'_'+i.value); if(v==='true') i.checked=true; });
+  }
+  restaurar();
+  document.addEventListener('input', ()=>clearTimeout(window._t) || (window._t=setTimeout(salvar,600)));
+</script>
+</body>
+</html>
